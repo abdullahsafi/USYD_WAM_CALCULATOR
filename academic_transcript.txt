@@ -1,0 +1,28 @@
+2018	S1C	INFO1110	Introduction to Programming	80.0	DI	6
+2018	S1C	INFO1111	Computing 1A Professionalism	78.0	DI	6
+2018	S1C	MATH1002	Linear Algebra	76.0	CR	3
+2018	S1C	MATH1021	Calculus Of One Variable	20.0	FA	3
+2018	S1C	MEDS1001	Human Biology	81.0	DI	6
+2018	S2C	ELEC1601	Introduction to Computer Systems	63.0	PS	6
+2018	S2C	INFO1112	Computing 1B OS and Network Platforms	79.0	CR	6
+2018	S2C	INFO1113	Object-Oriented Programming	57.0	PS	6
+2018	S2C	MATH1064	Discrete Mathematics for Computation	50.0	PS	6
+2019	S1C	COMP2123	Data Structures and Algorithms	74.0	CR	6
+2019	S1C	DATA1001	Foundations of Data Science	45.0	FA	6
+2019	S1C	DATA2001	Data Science: Big Data and Data Diversity	73.0	CR	6
+2019	S2C	BIOL1007	From Molecules to Ecosystems	71.0	CR	6
+2019	S2C	DATA2002	Data Analytics: Learning from Data	68.0	CR	6
+2019	S2C	ISYS2120	Data and Information Management	77.0	DI	6
+2019	S2C	SOFT2412	Agile Software Development Practices	78.0	DI	6
+2020	S1C	INFO2222	Computing 2 Usability and Security	67.0	CR	6
+2020	S1CIJA	MATH1011	Applications of Calculus	55.0	PS	3
+2020	S2C	DATA3406	Human-in-the-Loop Data Analytics	85.0	HD	6
+2020	S2C	MEDS2004	Microbes, Infection and Immunity	76.0	DI	6
+2020	S2C	MEDS2005	Human Anatomy and Histology	73.0	CR	6
+2020	S2C	OLET1401	Radiological Interpretation: the Chest	95.0	HD	2
+2020	S2C	OLET1605	Communication in STEM	81.0	DI	2
+2020	S2C	OLET1620	Data Science in Astronomy: Analysis	81.0	DI	2
+2021	S1C	COMP3308	Introduction to Artificial Intelligence	88.0	HD	6
+2021	S1C	DATA3404	Scalable Data Management	79.0	DI	6
+2021	S1C	DATA3888	Data Science Capstone	86.0	HD	6
+2021	S1C	INFO3333	Computing 3 Management	78.0	DI	6
