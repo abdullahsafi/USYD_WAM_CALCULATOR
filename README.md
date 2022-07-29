@@ -6,7 +6,7 @@ Motivation
 ----------------
 The sydney student portal lacks the feature to calculate total degree WAM and instead only calculates annually/semesterly. So, I made a little program to provide your WAM and also other small but interesting statistics about your degree progress and subject performance. The WAM formula used in this program follows the formula used in the factulty of engineering.
 
-Anyone can download this code use and improve it or personalise it to suit your factulty calculation of WAM.
+Anyone can download this code use and improve it or personalise it to suit your factulty calculation of WAM. Feel free to improve the program by adding more interesting degree statstics (maybe a converter to GPA can be looked at in the future)
 
 Getting Started :file_folder:
 --------------
