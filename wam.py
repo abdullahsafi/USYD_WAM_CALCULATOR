@@ -133,21 +133,51 @@ def grade_count(info):
     for k, v in grade_counts.items():
         print(str(k) + ": " + str(v))
 
+print("")
+print("Select a calculation using a number \"2\" or a sequence of numbers \"1 2 3\" from the following list: ")
+print("")
+print("1: Grade Overview")
+print("2: Weighted Average Mark (WAM)")
+print("3: Engineering Specific Weighted Average Mark (EIHWAM)")
+print("4: Annual Average Marks (AAM)")
+print("5: COVID WAM (CWAM)")
 
-def output(unit_info):
+print("")
+print("")
+
+input = input("Calculation Selection: ")
+
+try:
+    input = input.split(" ")
+    input = [int(x) for x in input]
+    for x in input:
+        if x > 5 or x < 1:
+            raise Exception('Please input a correct number or sequence of numbers.')
+except:
     print("")
-    try:
-        print("Grade Overview: ")
+    print("Please input a correct number or sequence of numbers.")
+    exit(0)
+
+
+try:
+    print("")
+    if 1 in input:
+        print("1: Grade Overview: ")
         grade_count(unit_info)
         print("")
-        print("Weighted Average Mark (WAM): " + str(round(WAM(unit_info),1)))
-        print("COVID WAM (CWAM): " + str(round(COVID_WAM(unit_info),1)))
-        print("Honours EIHWAM: " + str(round(EIHWAM(unit_info),1)))
+    if 2 in input:
+        print("2: Weighted Average Mark (WAM): " + str(round(WAM(unit_info),1)))
+        print("")
+    if 3 in input:
+        print("3: Honours EIHWAM: " + str(round(EIHWAM(unit_info),1)))
+        print("")
+    if 4 in input:
         print("")
         print("Annual Average Mark (AAM): ")
         AAM(unit_info)
         print("")
-    except:
-        print("An error occurred with calculation. Please check format of academic_transcript.txt")
-
-output(unit_info)
+    if 5 in input:
+        print("5: COVID WAM (CWAM): " + str(round(COVID_WAM(unit_info),1)))
+        print("")
+except:
+    print("An error occurred with calculation. Please check format of academic_transcript.txt")
