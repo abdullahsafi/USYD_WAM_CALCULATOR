@@ -1,79 +1,153 @@
-import sys, os
+import sys, os, re
 
-# File rows
 # Year, Semester, Unit, Unit_name, Mark, Grade, Credit_points
-
 file = open(os.path.join(sys.argv[1]))
 lines = file.readlines()
 unit_info = []
 for i in lines:
     unit_info.append(i.strip("\n").split("\t"))
 
-def wam_engeering(unit_info):
-    marks = []
-    sum_credits = 0
-    for i in range(len(unit_info)):
-        marks.append(float(unit_info[i][4]) * float(unit_info[i][6]))
-        sum_credits = sum_credits + float(unit_info[i][6])
-    #print(sorted(marks, reverse=True))
-    average = sum(marks) / sum_credits
-    return str(round(average, 1))
+"""
+Σ(Wi x CPi x Mi) / Σ(Wi x CPi)
 
-def covid_wam(unit_info):
-    marks = []
-    sum_credits = 0
-    for i in range(len(unit_info)):
-        if unit_info[i][0] == "2020":
-            if unit_info[i][1] != "S1C" and unit_info[i][1] != "S1CIJA":
-                marks.append(float(unit_info[i][4]) * float(unit_info[i][6]))
-                sum_credits = sum_credits + float(unit_info[i][6])
-        else:
-            marks.append(float(unit_info[i][4]) * float(unit_info[i][6]))
-            sum_credits = sum_credits + float(unit_info[i][6])
-    average = sum(marks) / sum_credits
-    return str(round(average, 1))
+Wi is the weighting given by 0 for 1000 level units of study, 2 for 2000 level units, 
+3 for 3000 level units and 4 for 4000 level or above units. 
 
-def grade_count(grade):
-    count = 0
-    for i in range(len(unit_info)):
-        if unit_info[i][5] == grade:
-            count = count + 1
-    return count
+Thesis units of study are given a double weighting of 8.
 
-def AAM(unit_info):
-    annual_marks = []
-    annual_cp = []
-    current_year = unit_info[0][0]
-    for i in range(len(unit_info)):
-        if unit_info[i][0] != current_year:
-            aam = sum(annual_marks) / sum(annual_cp)
-            print(current_year + ": " + str(round(aam,1)))
-            annual_marks = []
-            annual_cp = []
-            current_year = unit_info[i][0]
-        elif unit_info[i][0] == current_year:
-            annual_marks.append(float(unit_info[i][4]) * float(unit_info[i][6]))
-            annual_cp.append(float(unit_info[i][6]))
-            if unit_info[-1][0] == current_year:
-                aam = sum(annual_marks) / sum(annual_cp)
-                print(current_year + ": " + str(round(aam,1)))
+CPi is the number of credit points for the unit of study.
+
+Mi is the mark achieved for the unit of study.
+"""
+def EIHWAM(info):
+    unit_wam_cal = []
+    unit_weight_cal = []
+    for course in info:
+        for i, info_part in enumerate(course):
+            if i == 2:
+                match = re.search(r"\d", info_part)
+                Wi = match.group()
+                if Wi == "1":
+                    Wi=0
+                    continue
+                if Wi == "5":
+                    Wi = 4
+            elif i == 4:
+                Mi = info_part
+            elif i == 6:
+                CPi = info_part
+            else:
+                continue
+        unit_wam_cal.append(int(Wi) * float(Mi) * int(CPi))
+        unit_weight_cal.append(int(Wi) * int(CPi))
+    num = sum(unit_wam_cal)
+    dem = sum(unit_weight_cal)
+    total = num/dem
+    return total
+    
+    
+"""
+WAM=Σ (CPi x Mi) / Σ (CPi)
+"""
+def WAM(info):
+    unit_wam_cal = []
+    unit_weight_cal = []
+    for course in info:
+        for i, info_part in enumerate(course):
+            if i == 4:
+                Mi = info_part
+            elif i == 6:
+                CPi = info_part
+            else:
+                continue
+        unit_wam_cal.append(int(CPi) * float(Mi))
+        unit_weight_cal.append(int(CPi))
+    num = sum(unit_wam_cal)
+    dem = sum(unit_weight_cal)
+    total = num/dem
+    return total
+
+"""
+Excludes semester 1 2020
+"""
+def COVID_WAM(info):
+    unit_wam_cal = []
+    unit_weight_cal = []
+    for course in info:
+        covid_marked = 0
+        for i, info_part in enumerate(course):
+            if i==0 and info_part == "2020":
+                covid_marked = 1
+            elif i==1 and covid_marked == 1 and info_part == "S1C":
+                CPi = 0
+            else:
+                covid_marked == 0
+            
+            if covid_marked == 0:
+                # try:
+                if i == 4:
+                    Mi = info_part
+                elif i == 6:
+                    CPi = info_part
+                else:
+                    continue
+        unit_wam_cal.append(int(CPi) * float(Mi))
+        unit_weight_cal.append(int(CPi))
+
+    num = sum(unit_wam_cal)
+    dem = sum(unit_weight_cal)
+    total = num/dem
+    return total
+
+"""
+AAM= Per year Σ (CPi x Mi) / Σ (CPi) 
+"""
+def AAM(info):
+    grouped_year = []
+
+    for row in info:
+        year = row[0]
+        found = False
+
+        for group in grouped_year:
+            if group[0][0] == year:
+                group.append(row)
+                found = True
                 break
 
-            
+        if not found:
+            grouped_year.append([row])
+
+    for year in grouped_year:
+        print(year[0][0] + ": " + str(round(WAM(year),1)))
+        
+"""
+Prints count of each grade
+"""        
+def grade_count(info):
+    grade_counts = {"FA":0, "PS": 0, "CR": 0, "DI": 0, "HD": 0}
+
+    for units in info:
+        grade_counts[units[5]] += 1
+    
+    for k, v in grade_counts.items():
+        print(str(k) + ": " + str(v))
 
 
+def output(unit_info):
+    print("")
+    try:
+        print("Grade Overview: ")
+        grade_count(unit_info)
+        print("")
+        print("Weighted Average Mark (WAM): " + str(round(WAM(unit_info),1)))
+        print("COVID WAM (CWAM): " + str(round(COVID_WAM(unit_info),1)))
+        print("Honours EIHWAM: " + str(round(EIHWAM(unit_info),1)))
+        print("")
+        print("Annual Average Mark (AAM): ")
+        AAM(unit_info)
+        print("")
+    except:
+        print("An error occurred with calculation. Please check format of academic_transcript.txt")
 
-print("")
-print("Grade Overview: ")
-print("HD: " + str(grade_count("HD")))
-print("DI: " + str(grade_count("DI")))
-print("CR: " + str(grade_count("CR")))
-print("PS: " + str(grade_count("PS")))
-print("FA: " + str(grade_count("FA")))
-print("")
-print("Weighted Average Mark (WAM): " + wam_engeering(unit_info))
-print("Converted WAM (CWAM): " + covid_wam(unit_info))
-print("")
-print("Annual Average Mark (AAM): ")
-AAM(unit_info)
-print("")
+output(unit_info)
