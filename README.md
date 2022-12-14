@@ -14,8 +14,16 @@ Getting Started :file_folder:
 Firstly clone or download the repo you can do this using:
 - `$ git clone https://github.com/abdullahsafi/USYD_WAM_CALCULATOR.git`
 
-Next copy your academic transcript from sydney student and paste it into a text file. It could be a new text file or you can over wrtie the file called `academic_transcript.txt`
+Next copy your academic transcript from sydney student and paste it into a text file. It could be a new text file or you can overwrite the file called `academic_transcript.txt`
 
-Finaly run the program using:
+Run the program using:
 - `python3 wam.py academic_transcript.txt` 
+
+Next you are prompted to choose from several wam calculations. To do so  input a correct number or sequence of numbers. Below is an example of the program:
+
+<p align="center">
+<img src="/readme_imgs/example.PNG" alt="example.PNG" width="700"/>
+</p>
+
+Finally you will recieve the printed calculations.
 
