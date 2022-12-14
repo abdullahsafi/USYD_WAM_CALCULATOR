@@ -22,7 +22,7 @@ Run the program using:
 Next you are prompted to choose from several wam calculations. To do so  input a correct number or sequence of numbers. Below is an example of the program:
 
 <p align="center">
-<img src="/readme_imgs/example.PNG" alt="example.PNG" width="700"/>
+<img src="/readme_imgs/example.png" alt="example.PNG" width="500"/>
 </p>
 
 Finally you will recieve the printed calculations.
