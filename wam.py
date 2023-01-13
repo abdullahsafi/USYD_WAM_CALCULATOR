@@ -32,6 +32,11 @@ def EIHWAM(info):
                     continue
                 if Wi == "5":
                     Wi = 4
+                if Wi == "4":
+                    if info_part=="INFO4911" or info_part=="INFO4912" or info_part=="INFO4913":
+                        Wi = 8
+                    else:
+                        Wi = 4
             elif i == 4:
                 Mi = info_part
             elif i == 6:
