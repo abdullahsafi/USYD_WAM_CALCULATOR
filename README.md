@@ -14,7 +14,7 @@ Getting Started :file_folder:
 Firstly clone or download the repo you can do this using:
 - `$ git clone https://github.com/abdullahsafi/USYD_WAM_CALCULATOR.git`
 
-Next copy your academic transcript from sydney student and paste it into a text file. It could be a new text file or you can overwrite the file called `academic_transcript.txt`
+Next copy your academic transcript from sydney student and paste it into a text file. It could be a new text file or you can overwrite the file called `academic_transcript.txt`. Ensure you find all subjects that are failed (FA) and replace the 0 credit points with how much credit points the subject is worth if you would have passed.
 
 Run the program using:
 - `python3 wam.py academic_transcript.txt` 
